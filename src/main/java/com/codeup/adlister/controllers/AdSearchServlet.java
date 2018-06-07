@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/ads")
-public class AdsIndexServlet extends HttpServlet {
+@WebServlet(name = "controllers.AdsSearchServlet", urlPatterns = "/search")
+public class AdSearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        List<Ad> ads = DaoFactory.getAdsDao().all();
-        System.out.println(ads.get(0).getUserId());
         request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adid = request.getParameter("adInfo");
-        int adId = Integer.parseInt(adid);
-        Ad showAd = DaoFactory.getAdsDao().findById(adId);
-        System.out.println("Ad id is " + showAd.getUserId());
-        request.getSession().setAttribute("showAd", showAd);
-        response.sendRedirect("/showinfo");
+        String search = request.getParameter("search");
+        //request.setAttribute("search", search);
+        List<Ad> ads = new ArrayList<>();
+        ads = DaoFactory.getAdsDao().title(search);
+        request.setAttribute("ads", ads);
+        request.getRequestDispatcher("/WEB-INF/ads/results.jsp").forward(request, response);
+
+
     }
 }

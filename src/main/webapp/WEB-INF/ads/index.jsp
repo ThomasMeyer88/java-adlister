@@ -5,6 +5,15 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Viewing All The Ads" />
     </jsp:include>
+    <style>
+        .redButton{
+            color: red;
+            background-color: red;
+            border-radius: 50%;
+            height: 25px;
+            width: 25px;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
@@ -14,11 +23,16 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+
+        <form action="/ads" method="post">
+            <label for="adInfo"><c:out value="${ad.title}"></c:out></label>
+            <input id="adInfo" name="adInfo" type="submit" value=${ad.id}>
+        </form>
         </div>
+
     </c:forEach>
 </div>
 
 </body>
+
 </html>

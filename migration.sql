@@ -13,10 +13,16 @@ CREATE TABLE users (
 
 CREATE TABLE ads (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user_id INT UNSIGNED NOT NULL,
+    userid INT UNSIGNED NOT NULL,
     title VARCHAR(240) NOT NULL,
     description TEXT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (userid) REFERENCES users(id)
         ON DELETE CASCADE
 );
+SELECT * from users;
+
+SELECT * from ads;
+
+SELECT * from ads WHERE id = 9 AND userid = 1;
+
