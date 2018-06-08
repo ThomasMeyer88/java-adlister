@@ -15,7 +15,7 @@
     <c:forEach var="ad" items="${viewUserAds}">
         <div class="col-md-6">
 
-            <form action="ads" method="post">
+            <form action="showinfo" method="post">
                 <label for="adInfo">${ad.title}</label>
                 <input id="adInfo" name="adInfo" type="submit" value=${ad.id}>
                     <%--<p>${ad.description}</p>--%>

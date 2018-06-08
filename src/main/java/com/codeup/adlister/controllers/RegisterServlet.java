@@ -4,6 +4,7 @@ import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLUsersDao;
 import com.codeup.adlister.dao.Users;
 import com.codeup.adlister.models.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,8 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
+        int numberOfRounds = 12;
+        password = BCrypt.hashpw(password, BCrypt.gensalt(numberOfRounds));
         if (DaoFactory.getUsersDao().findByUsername(username) != null) {
             error = true;
         }else {

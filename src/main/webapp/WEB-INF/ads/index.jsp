@@ -24,7 +24,7 @@
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
 
-        <form action="/ads" method="post">
+        <form action="/showinfo" method="post">
             <label for="adInfo"><c:out value="${ad.title}"></c:out></label>
             <input id="adInfo" name="adInfo" type="submit" value=${ad.id}>
         </form>

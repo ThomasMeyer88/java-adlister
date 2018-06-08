@@ -22,18 +22,18 @@
 
     <%--<c:forEach var="showAd" items="${showAd}">--%>
         <div class="col-md-6">
-            <h1><c:out value ="${sessionScope.showAd.title}"></c:out></h1>
+            <h1><c:out value ="${showAd.title}"></c:out></h1>
             <%--<h5>Posted by: ${sessionScope.showAd.userid}</h5>--%>
             <h6>Description: </h6>
-                <p><c:out value ="${sessionScope.showAd.description}"></c:out></p>
+                <p><c:out value ="${showAd.description}"></c:out></p>
             <form action="/delete" method="POST">
                 <label for="adId">delete</label>
-                <input id="adId" name="adId" type="submit" class="redButton" value=${sessionScope.showAd.id}>
+                <input id="adId" name="adId" type="submit" class="redButton" value=${showAd.id}>
             </form>
-            <%--<form action="/viewuser" method="POST">--%>
-                <%--<label for="viewUser">View Poster</label>--%>
-                <%--<input id="viewUser" name="viewUser" type="submit" value=${sessionScope.showAd.userid}>--%>
-            <%--</form>--%>
+            <form action="/ads" method="POST">
+                <label for="viewUser">View Poster</label>
+                <input id="viewUser" name="viewUser" type="submit" value=${userId}>
+            </form>
         </div>
     <%--</c:forEach>--%>
 </div>

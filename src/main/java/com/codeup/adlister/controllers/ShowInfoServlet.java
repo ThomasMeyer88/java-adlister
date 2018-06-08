@@ -20,4 +20,15 @@ public class ShowInfoServlet extends HttpServlet {
 //        }
         request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String adid = request.getParameter("adInfo");
+        int adId = Integer.parseInt(adid);
+        Ad showAd = DaoFactory.getAdsDao().findById(adId);
+        long userId = showAd.getUserId();
+        System.out.println("user id " + userId);
+        request.setAttribute("showAd", showAd);
+        request.setAttribute("userId", userId);
+        request.getRequestDispatcher("/WEB-INF/ads/ad.jsp").forward(request, response);
+
+    }
 }

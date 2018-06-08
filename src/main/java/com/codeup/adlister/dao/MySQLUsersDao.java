@@ -59,16 +59,14 @@ public class MySQLUsersDao implements Users {
     }
 
     @Override
-    public User findByUserId(int id){
+    public User findByUserId(String id){
+        String sql = "SELECT * FROM users WHERE id = ?";
         try{
-            String sql = "SELECT * FROM ads WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
-            String userId = Integer.toString(id);
-            stmt.setString(1, userId);
-            ResultSet rs = stmt.executeQuery();
-            return extractUser(rs);
+            stmt.setString(1, id);
+            return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving ads by user id", e);
+            throw new RuntimeException("Error retrieving user by userid", e);
         }
     }
 
